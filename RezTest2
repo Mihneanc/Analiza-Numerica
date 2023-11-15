@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def NR(f, df, a, b, x0, ITMAX, TOL):
+    for k in range(1, ITMAX + 1):
+        x1 = x0 - f(x0) / df(x0)
+        eroare = abs(x1 - x0)
+        print(f"Iterația {k}: x = {x1}, Eroare = {eroare}")
+
+        if eroare < TOL:
+            print(f"Convergență după {k} iterații.")
+            return x1, k
+
+        x0 = x1
+
+    print(f"Metoda Newton-Raphson nu a convergat după {ITMAX} iterații.")
+    return None, ITMAX
+
+def f(x):
+    return x**3 - 2*x**2 - 5
+
+def df(x):
+    return 3*x**2 - 4*x
+
+a, b = 1, 4
+
+if f(a) * f(b) >= 0:
+    print("Eroare: Condiția f(a)f(b) < 0 nu este îndeplinită.")
+else:
+    x0 = 4
+    ITMAX = 10
+    TOL = 1e-10
+
+    solutie, iteratii = NR(f, df, a, b, x0, ITMAX, TOL)
+
+    if solutie is not None:
+        print(f"Soluție numerică: x = {solutie} după {iteratii} iterații.")
+    else:
+        print("Metoda Newton-Raphson nu a convergat.")
