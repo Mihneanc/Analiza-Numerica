@@ -1,0 +1,59 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Implementarea metodei Newton-Raphson pentru găsirea soluției numerice a ecuației f(x) = 0
+def NR(f, df, a, b, x0, ITMAX, TOL):
+    for k in range(1, ITMAX + 1):
+        # Calculăm următoarea aproximare folosind formula Newton-Raphson
+        x1 = x0 - f(x0) / df(x0)
+        
+        # Calculăm eroarea absolută
+        eroare = abs(x1 - x0)
+
+        # Afișăm detaliile iterației
+        print(f"Iterația {k}: x = {x1}, Eroare = {eroare}")
+
+        # Verificăm convergența
+        if eroare < TOL:
+            print(f"Convergență după {k} iterații.")
+            return x1, k
+
+        # Actualizăm aproximarea pentru următoarea iterație
+        x0 = x1
+
+    print(f"Metoda Newton-Raphson nu a convergat după {ITMAX} iterații.")
+    return None, ITMAX
+
+# Funcția pe care o rezolvăm: f(x) = x^3 - 2x^2 - 5
+def f(x):
+    return x**3 - 2*x**2 - 5
+
+# Derivata funcției f(x)
+def df(x):
+    return 3*x**2 - 4*x
+
+# Intervalul [a, b]
+a, b = 1, 4
+
+# Verificăm dacă condiția f(a)f(b) < 0 este îndeplinită
+if f(a) * f(b) >= 0:
+    print("Eroare: Condiția f(a)f(b) < 0 nu este îndeplinită.")
+else:
+    # Aproximare inițială, numărul maxim de iterații și toleranța
+    x0 = 4
+    ITMAX = 10
+    TOL = 1e-10
+
+    # Apelăm funcția Newton-Raphson
+    solutie, iteratii = NR(f, df, a, b, x0, ITMAX, TOL)
+
+    if solutie is not None:
+        print(f"Soluție numerică: x = {solutie} după {iteratii} iterații.")
+    else:
+        print("Metoda Newton-Raphson nu a convergat.")
+
+# Viteza de convergență a metodei Newton-Raphson este, în general, pătratică, ceea ce înseamnă că numărul de cifre corecte dublează la fiecare iterație.
+
+# O altă metodă iterativă care folosește doar valorile funcției f este Metoda Secantei, care aproximează derivata cu o rată de convergență pătratică.
+
+# Pentru a determina constanta erorii asimptotice a metodei Newton-Raphson, putem utiliza expansiunea în serie Taylor a funcției f(x) în jurul soluției reale x*. Constanta de eroare asimptotică este asociată termenului de ordin superior în această expansiune.
