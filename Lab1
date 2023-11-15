@@ -1,0 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+a = -2
+b = 2
+def f(x) : 
+    return x**6-x-1
+x = np.linspace(a,b)
+y=f(x)
+plt.plot(x, y, c = 'b', linewidth = 2)
+plt.plot(x, np.zeros(len(x)), c = 'r')
+plt.show()

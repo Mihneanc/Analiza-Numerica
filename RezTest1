@@ -1,0 +1,46 @@
+def NR(f, df, a, b, x0, ITMAX, TOL):
+    for k in range(1, ITMAX + 1):
+        # Calculăm următoarea aproximare folosind formula Newton-Raphson
+        x1 = x0 - f(x0) / df(x0)
+
+        # Calculăm eroarea absolută
+        eroare = abs(x1 - x0)
+
+        # Afișăm detaliile iterației
+        print(f"Iterația {k}: x = {x1}, Eroare = {eroare}")
+
+        # Verificăm convergența
+        if eroare < TOL:
+            print(f"Convergență după {k} iterații.")
+            return x1, k
+
+        # Actualizăm aproximarea pentru următoarea iterație
+        x0 = x1
+
+    print(f"Metoda Newton-Raphson nu a convergat după {ITMAX} iterații.")
+    return None, ITMAX
+
+# Definim funcția f și derivata sa df
+def f(x):
+    return x**2 - 4
+
+def df(x):
+    return 2 * x
+
+# Definim intervalul [a, b]
+a, b = 0, 3
+
+# Verificăm dacă condiția f(a)f(b) < 0 este îndeplinită
+if f(a) * f(b) >= 0:
+    print("Eroare: Condiția f(a)f(b) < 0 nu este îndeplinită.")
+else:
+    # Stabilim aproximarea inițială, numărul maxim de iterații și toleranța
+    x0 = (a + b) / 2
+    ITMAX = 100
+    TOL = 1e-6
+
+    # Apelăm funcția NR
+    solutie, iteratii = NR(f, df, a, b, x0, ITMAX, TOL)
+
+    if solutie is not None:
+        print(f"Soluție numerică: x = {solutie} după {iteratii} iterații.")

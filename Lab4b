@@ -1,0 +1,56 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x): 
+    return x**3 - 4*x**2 + 5*x - 2
+
+def fd(x):
+    return 3*x**2 - 8*x + 5
+
+def fdd(x):
+    return 6*x - 8
+
+def NewtonRaphsonModificata1(m, f, fd, x_n, ITMAX, TOL):
+  for i in range (1, ITMAX +1):
+    if np.abs(f(x_n)) >= TOL:
+      x_n = x_n - m*(f(x_n)/fd(x_n))
+      # plt.scatter(x_n, f(x_n))
+      print("n = {:d}, x_n = {:6f}, |f(x_n)|= {:.2e}".format(i, x_n, np.abs(f(x_n))) )
+  return x_n
+
+NewtonRaphsonModificata1(2, f, fd, 0, 20, 10**(-10))
+
+print("Comparatie cu metoda normala")
+def NewtonRaphson(f, df, x_n, N):
+  for i in range (1, N):
+    x_n = x_n - (f(x_n)/df(x_n))
+    print("n = {:d}, x_n = {:6f}, |f(x_n)|= {:.2e}".format(i, x_n, np.abs(f(x_n))) )
+
+NewtonRaphson(f, fd, 0, 20)
+
+print("Metoda modificata 2")
+def NewtonRaphsonModificata2(fdd, f, fd, x_n, ITMAX, TOL):
+  for i in range (1, ITMAX +1):
+    if np.abs(f(x_n)) >= TOL:
+      x_n = x_n -(f(x_n)/fd(x_n))/((fd(x_n)**2-f(x_n)*fdd(x_n))/fd(x_n)**2)
+      # plt.scatter(x_n, f(x_n))
+      print("n = {:d}, x_n = {:6f}, |f(x_n)|= {:.2e}".format(i, x_n, np.abs(f(x_n))) )
+    else:
+      break
+  return x_n
+
+NewtonRaphsonModificata2(fdd, f, fd, 0, 20, 10**(-5))
+
+TOL = 10**(-5)
+
+x = np.linspace(0,1.75)
+y = f(x)
+yd = fd(x)
+
+ITMAX = 20
+
+plt.figure()
+plt.plot(x,y)
+plt.scatter(x,f(x))
+
+plt.show()

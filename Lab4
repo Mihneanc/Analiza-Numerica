@@ -1,0 +1,22 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x): 
+    return x**3 - 4*x**2 + 5*x - 2
+
+def fd(x):
+    return 3*x**2 - 8*x + 5
+
+TOL = 10**(-5)
+
+x = np.linspace(0,1.75)
+y = f(x)
+yd = fd(x)
+
+ITMAX = 20
+
+plt.figure()
+plt.plot(x,y)
+plt.scatter(x,f(x))
+
+plt.show()

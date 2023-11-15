@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x):
+    return x + e**(-x**2) * cos(x)
+
+def deriv_f(x):
+    return -np.sin(x) - 1
+
+def NewtonRaphsonf(f(x),deriv_f(x),x0,N):
+    for i in range(N):
+        x0 = x0 - f(x0) / deriv_f(x)
+    return x0
+
+f = lambda x: x**3 + 4*(x**2) - 10
+x = np.linspace(1,2,1000)
+
+phi = lambda x: np.sqrt(10 / (x + 4))
+
+print NewtonRaphsonf()
+
+plt.figure()
+plt.plot(x,f(x))
+plt.plot(x,0*x)
+
+plt.show()

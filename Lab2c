@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def MatPunctFix (phi, x0, N):
+    for i in range(N):
+        x0 = phi(x0)
+        print (x0, f(x0))
+    return x0
+
+f = lambda x: x**3 + 4*(x**2) - 10
+x = np.linspace(1,2,1000)
+
+phi = lambda x: -x^3 - 4*x^2 + x + 10
+
+MatPunctFix (phi, 1, 20)
+
+plt.figure()
+plt.plot(x,f(x))
+plt.plot(x,0*x)
+
+plt.show()

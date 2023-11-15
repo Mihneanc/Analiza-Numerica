@@ -1,0 +1,120 @@
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+a=-1
+
+b=1
+
+x=np.linspace(a,b)
+
+def f(x):
+
+    return x+(np.e**-(x)**2)*np.cos(x)
+
+plt.plot(x,f(x),c='b',linewidth=2)
+
+plt.show()
+
+x0=-1
+
+x1=1
+
+N=10
+
+#erori=[]
+# def Secantaf(f,x0,x1,N):
+#     for n in range(2,N):
+#         x1,x0=x1-f(x1)*(x1-x0)/(f(x1)-f(x0)),x1
+#         err=abs(x0-x1)/abs(x0)
+#         erori.append(err)
+#         print("La iteratia {:d},x={:.10f},err={:.2e}".format(n,x1,err))
+#     return erori
+# Secantaf(f,x0,x1,N)
+# plt.plot(list(range(2, N)), erori,c='black')
+# plt.scatter(list(range(2,N)),erori,c='r')
+# plt.show()
+
+erori1=[]
+
+def PozitieFalsaf(f,x0,x1,N):
+
+    x2=x1-f(x1)*(x1-x0)/(f(x1)-f(x0))
+
+    err=abs(x2-x1)/abs(x1)
+
+    erori1.append(err)
+
+    for n in range(3,N):
+
+        if f(x1)*f(x2)<=0:
+
+            x2,x1,x0=x2-f(x2)*(x2-x1)/(f(x2)-f(x1)),x2,x1
+
+        else:
+
+            x2,x1,x0=x2-f(x2)*(x2-x0)/(f(x2)-f(x0)),x2,x1
+
+        err=abs(x2-x1)/abs(x1)
+
+        erori1.append(err)
+
+        print("La iteratia {:d},x={:.10f},err={:.2e}".format(n,x2,err))
+
+    return erori1
+
+PozitieFalsaf(f,x0,x1,N)
+
+plt.plot(list(range(2,N)), erori1,c='black')
+
+plt.scatter(list(range(2,N)),erori1,c='r')
+
+plt.show()
+
+# def Secantaf(f,x0,x1,N):
+#     for n in range(2,N):
+#         x1,x0=x1-f(x1)*(x1-x0)/(f(x1)-f(x0)),x1
+#         err=abs(x0-x1)/abs(x0)
+#         erori.append(err)
+#         print("La iteratia {:d},x={:.10f},err={:.2e}".format(n,x1,err))
+#     return erori
+# Secantaf(f,x0,x1,N)
+# plt.plot(list(range(2, N)), erori,c='black')
+# plt.scatter(list(range(2,N)),erori,c='r')
+# plt.show()
+
+erori1=[]
+
+def PozitieFalsaf(f,x0,x1,N):
+
+    x2=x1-f(x1)*(x1-x0)/(f(x1)-f(x0))
+
+    err=abs(x2-x1)/abs(x1)
+
+    erori1.append(err)
+
+    for n in range(3,N):
+
+        if f(x1)*f(x2)<=0:
+
+            x2,x1,x0=x2-f(x2)*(x2-x1)/(f(x2)-f(x1)),x2,x1
+
+        else:
+
+            x2,x1,x0=x2-f(x2)*(x2-x0)/(f(x2)-f(x0)),x2,x1
+
+        err=abs(x2-x1)/abs(x1)
+
+        erori1.append(err)
+
+        print("La iteratia {:d},x={:.10f},err={:.2e}".format(n,x2,err))
+
+    return erori1
+
+PozitieFalsaf(f,x0,x1,N)
+
+plt.plot(list(range(2,N)), erori1,c='black')
+
+plt.scatter(list(range(2,N)),erori1,c='r')
+
+plt.show()

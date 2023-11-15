@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+a = -2
+b = 2
+
+TOL = 10**(-5)
+
+def f(x) : 
+    return x**6-x-1
+
+x = np.linspace(a,b)
+y=f(x)
+plt.plot(x, y, c = 'b', linewidth = 2)
+plt.plot(x, np.zeros(len(x)), c = 'r')
+plt.show()
+
+x = (a+b)/2
+
+while abs(f(x)) > TOL:
+    if f(a)*f(x) < 0:
+        b = x
+    else:
+        a = x
+    x = (a+b)/2
+
+print (x)
+plt.scatter(x,f(x),s=50)
